@@ -1,0 +1,19 @@
+{
+  "name": "TAJ JEWELRY — التحقق من شهادة السبيكة",
+  "short_name": "TAJ JEWELRY",
+  "description": "نظام التحقق من أصالة سبائك الذهب وشهادات الجودة عبر QR Code",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c1220",
+  "theme_color": "#b8860b",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

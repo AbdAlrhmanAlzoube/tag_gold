@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { verifyCertificate, getCertificateUrl } from '../api/client'
 import type { Certificate } from '../types/certificate'
 import BrandLogo from '../components/BrandLogo'
+import Seo, { SITE_URL } from '../components/Seo'
 
 interface SpecRowProps {
   label: string
@@ -63,6 +64,11 @@ export default function CertificatePage() {
   if (loading) {
     return (
       <div className="w-full max-w-4xl animate-fade-in-up">
+        <Seo
+          title={serial ? `التحقق من الشهادة ${serial}` : 'التحقق من الشهادة'}
+          description="جاري التحقق من شهادة أصالة سبيكة الذهب."
+          path={serial ? `/cert/${serial}` : '/verify'}
+        />
         <div className="bg-white/80 rounded-2xl p-12 text-center shadow-xl">
           <div className="inline-block w-10 h-10 border-4 border-gold-200 border-t-gold-500 rounded-full animate-spin mb-4" />
           <p className="text-navy-800/60 font-medium">جاري التحقق من الشهادة...</p>
@@ -74,6 +80,12 @@ export default function CertificatePage() {
   if (error || !certificate) {
     return (
       <div className="w-full max-w-lg animate-fade-in-up">
+        <Seo
+          title="شهادة غير موجودة"
+          description="لم يتم العثور على شهادة سبيكة الذهب المطلوبة."
+          path={serial ? `/cert/${serial}` : '/verify'}
+          noindex
+        />
         <div className="bg-white/90 rounded-2xl p-8 text-center shadow-xl border border-red-100">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
             <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -97,6 +109,25 @@ export default function CertificatePage() {
 
   return (
     <div className="w-full max-w-4xl animate-fade-in-up">
+      <Seo
+        title={`شهادة أصالة ${certificate.serial_number}`}
+        description={`شهادة موثقة لسبيكة ${certificate.item_name} — عيار ${certificate.karat}، نقاء ${certificate.purity}، وزن ${certificate.weight}${certificate.weight_unit}. ${certificate.brand_ar || 'تاج للمجوهرات'}.`}
+        path={`/cert/${certificate.serial_number}`}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: certificate.item_name,
+          sku: certificate.serial_number,
+          brand: { '@type': 'Brand', name: certificate.brand || 'TAJ JEWELRY' },
+          description: `سبيكة ${certificate.metal_ar || certificate.metal} عيار ${certificate.karat} — شهادة أصالة رقمية`,
+          url: `${SITE_URL}/cert/${certificate.serial_number}`,
+          additionalProperty: [
+            { '@type': 'PropertyValue', name: 'Karat', value: certificate.karat },
+            { '@type': 'PropertyValue', name: 'Purity', value: certificate.purity },
+            { '@type': 'PropertyValue', name: 'Weight', value: `${certificate.weight}${certificate.weight_unit}` },
+          ],
+        }}
+      />
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gold-50 via-white to-gold-50/50 border border-gold-200/60 shadow-2xl shadow-gold-900/10">
         {/* Header */}
         <div className="relative px-6 sm:px-8 pt-6 sm:pt-8 pb-4 flex items-start justify-between">

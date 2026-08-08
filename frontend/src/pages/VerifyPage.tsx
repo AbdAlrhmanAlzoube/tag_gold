@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import BrandLogo from '../components/BrandLogo'
+import Seo from '../components/Seo'
 
 export default function VerifyPage() {
   const [serial, setSerial] = useState('')
@@ -35,6 +36,11 @@ export default function VerifyPage() {
 
   return (
     <div className="w-full max-w-2xl animate-fade-in-up">
+      <Seo
+        title="تحقق من شهادة سبيكة الذهب"
+        description="أدخل رقم شهادة السبيكة للتحقق الفوري من الأصالة والعيار والنقاء والوزن — تاج للمجوهرات TAJ JEWELRY."
+        path="/verify"
+      />
       <div className="relative overflow-hidden rounded-2xl bg-gold-50/80 backdrop-blur-sm border border-gold-200/60 shadow-xl shadow-gold-900/5">
         <div className="watermark">
           <span>{brandName}</span>

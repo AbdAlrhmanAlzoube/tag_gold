@@ -12,6 +12,7 @@ import {
   type CertificateFormData,
 } from '../api/client'
 import BrandLogo from '../components/BrandLogo'
+import Seo from '../components/Seo'
 
 const emptyForm: CertificateFormData = {
   serial_number: '',
@@ -162,6 +163,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="w-full max-w-6xl animate-fade-in-up">
+      <Seo title="إدارة الشهادات" path="/admin/dashboard" noindex />
       {toast && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-navy-900 text-white px-6 py-3 rounded-xl shadow-xl text-sm font-medium">
           {toast}

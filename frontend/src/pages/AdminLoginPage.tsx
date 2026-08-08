@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { adminLogin } from '../api/client'
 import BrandLogo from '../components/BrandLogo'
+import Seo from '../components/Seo'
 import axios from 'axios'
 
 export default function AdminLoginPage() {
@@ -35,6 +36,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="w-full max-w-md animate-fade-in-up">
+      <Seo title="لوحة التحكم" path="/admin" noindex />
       <div className="bg-white/90 rounded-2xl border border-gold-200/60 shadow-xl p-8">
         <div className="flex flex-col items-center mb-8">
           <BrandLogo size="md" />
