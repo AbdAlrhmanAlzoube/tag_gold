@@ -3,30 +3,19 @@ import BrandLogo from '../components/BrandLogo'
 import Seo, {
   organizationJsonLd,
   websiteJsonLd,
-  faqJsonLd,
   serviceJsonLd,
 } from '../components/Seo'
 
 const brandName = import.meta.env.VITE_BRAND_NAME || 'TAJ JEWELRY'
 const brandNameAr = import.meta.env.VITE_BRAND_NAME_AR || 'تاج للمجوهرات'
 
-const faqs = [
-  {
-    q: 'كيف أتحقق من أصالة سبيكة الذهب؟',
-    a: 'امسح رمز QR الموجود على السبيكة أو أدخل رقم الشهادة في صفحة التحقق لتحصل فوراً على شهادة الأصالة الرقمية مع الوزن والعيار والنقاء.',
-  },
-  {
-    q: 'ما الذي تتضمنه شهادة السبيكة الرقمية؟',
-    a: 'تتضمن الرقم التسلسلي، اسم القطعة، نوع المعدن، العيار، درجة النقاء، الوزن، وتاريخ الإصدار، مع إمكانية التحقق المستمر عبر نفس الرابط.',
-  },
-  {
-    q: 'هل يمكن تزوير رقم الشهادة؟',
-    a: 'كل شهادة مرتبطة بسجل فريد في نظام تاج للمجوهرات. إذا لم يظهر السجل أو كانت البيانات غير متطابقة، فهذا مؤشر على عدم أصالة القطعة.',
-  },
-  {
-    q: 'هل الخدمة مجانية للعملاء؟',
-    a: 'نعم، التحقق من شهادة الأصالة متاح مجاناً لأي عميل يحمل سبيكة صادرة ضمن نظام تاج للمجوهرات.',
-  },
+const weights = ['1', '2.5', '5', '10', '20', '31.1', '50', '100']
+
+const productSpecs = [
+  { label: 'المعدن', value: 'ذهب خالص' },
+  { label: 'النقاء', value: '995 / 99.5%' },
+  { label: 'العيار', value: '24 قيراط' },
+  { label: 'النوع', value: 'سبيكة' },
 ]
 
 const features = [
@@ -65,7 +54,7 @@ export default function LandingPage() {
     <div className="w-full">
       <Seo
         path="/"
-        jsonLd={[organizationJsonLd(), websiteJsonLd(), serviceJsonLd(), faqJsonLd(faqs)]}
+        jsonLd={[organizationJsonLd(), websiteJsonLd(), serviceJsonLd()]}
       />
 
       <header className="fixed top-0 inset-x-0 z-50 bg-[#0c1220]/80 backdrop-blur-md border-b border-white/5">
@@ -134,10 +123,10 @@ export default function LandingPage() {
                 </svg>
               </Link>
               <a
-                href="#faq"
+                href="#product"
                 className="inline-flex items-center px-6 py-3.5 rounded-xl border border-white/20 text-white/80 hover:bg-white/5 font-semibold transition-colors"
               >
-                أسئلة شائعة
+                تفاصيل المنتج
               </a>
             </div>
           </div>
@@ -169,40 +158,51 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-white" aria-labelledby="about-title">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 id="about-title" className="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-4 text-center">
-            لماذا شهادة الذهب الرقمية؟
-          </h2>
-          <p className="text-navy-800/70 leading-relaxed text-center mb-4">
-            في سوق الذهب، الثقة أساس القرار. يوفّر نظام {brandName} منصة تحقق فورية تربط كل سبيكة
-            برقم تسلسلي فريد وشهادة رقمية يمكن الرجوع إليها في أي وقت عبر الإنترنت.
-          </p>
-          <p className="text-navy-800/70 leading-relaxed text-center">
-            سواء اشتريت أونصة ذهب أو نصف أونصة، يمكنك التأكد من العيار والنقاء والوزن خلال ثوانٍ —
-            بدون تطبيقات معقدة، فقط رابط الشهادة أو رمز QR على القطعة.
-          </p>
-        </div>
-      </section>
+      <section id="product" className="py-20 sm:py-28 bg-[#0c1220] relative overflow-hidden" aria-labelledby="product-title">
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse 70% 50% at 20% 30%, rgba(184,134,11,0.22), transparent), radial-gradient(ellipse 50% 40% at 85% 70%, rgba(207,159,63,0.12), transparent)',
+          }}
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 id="product-title" className="text-3xl sm:text-4xl font-extrabold text-white mb-4">تفاصيل المنتج</h2>
+            <p className="text-white/55 leading-relaxed max-w-2xl mx-auto">
+              هي قطعة ذهبية مصنعة من قبل شركة {brandName} وتتميز بنقاوتها العالية من الذهب الخالص حيث تحتوي على{' '}
+              <span className="text-gold-300 font-semibold">99.5%</span> من الذهب الخالص، دون وجود أي معادن أخرى ممزوجة بها.
+            </p>
+          </div>
 
-      <section id="faq" className="py-16 sm:py-24 bg-gradient-to-b from-[#ebe4d4] to-[#f5f0e6]" aria-labelledby="faq-title">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 id="faq-title" className="text-3xl font-extrabold text-navy-900 mb-10 text-center">
-            الأسئلة الشائعة حول التحقق من سبائك الذهب
-          </h2>
-          <div className="space-y-4">
-            {faqs.map((f) => (
-              <details
-                key={f.q}
-                className="group rounded-xl bg-white/80 border border-gold-200/50 px-5 py-4 open:shadow-md"
-              >
-                <summary className="cursor-pointer font-bold text-navy-900 list-none flex justify-between items-center gap-3">
-                  <span>{f.q}</span>
-                  <span className="text-gold-500 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
-                </summary>
-                <p className="mt-3 text-sm text-navy-800/65 leading-relaxed">{f.a}</p>
-              </details>
+          <div className="mb-10">
+            <p className="text-center text-xs font-bold tracking-[0.15em] text-gold-400 mb-4">الوزن</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {weights.map((w) => (
+                <span
+                  key={w}
+                  className="min-w-[3.25rem] px-3 py-2 text-center text-sm font-bold text-gold-300 border border-gold-500/30 bg-gold-500/10"
+                >
+                  {w}
+                  <span className="block text-[10px] font-semibold text-white/40 mt-0.5">غرام</span>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <dl className="grid sm:grid-cols-2 gap-8 sm:gap-6 mb-12 max-w-lg mx-auto">
+            {productSpecs.map((spec) => (
+              <div key={spec.label} className="text-center">
+                <dt className="text-xs font-bold tracking-[0.15em] text-gold-400 mb-2">{spec.label}</dt>
+                <dd className="text-lg font-bold text-white m-0">{spec.value}</dd>
+              </div>
             ))}
+          </dl>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 text-center border-t border-white/10 pt-8">
+            <p className="text-white/70 text-sm sm:text-base font-semibold">نحن ملتزمون بالوزن والنقاوة</p>
+            <span className="hidden sm:block w-px h-5 bg-white/15" aria-hidden="true" />
+            <p className="text-gold-300 text-sm sm:text-base font-bold">معفاة من الضريبة</p>
           </div>
         </div>
       </section>
@@ -231,7 +231,7 @@ export default function LandingPage() {
           <p className="text-sm text-white/50">
             <Link to="/verify" className="hover:text-gold-300 transition-colors">التحقق من الشهادة</Link>
             <span className="mx-2 text-white/20">|</span>
-            <a href="#faq" className="hover:text-gold-300 transition-colors">الأسئلة الشائعة</a>
+            <a href="#product" className="hover:text-gold-300 transition-colors">تفاصيل المنتج</a>
           </p>
           <p className="text-sm text-white/30">
             © {new Date().getFullYear()} {brandName} — {brandNameAr}. جميع الحقوق محفوظة.
