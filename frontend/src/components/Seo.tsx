@@ -75,13 +75,22 @@ export default function Seo({
 export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'JewelryStore',
     name: BRAND,
     alternateName: BRAND_AR,
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/brand/taj-logo.png`,
+    image: `${SITE_URL}/brand/taj-logo.png`,
     description: DEFAULT_DESC,
-    areaServed: 'Worldwide',
+    email: 'bassam.alsloom123@gmail.com',
+    telephone: ['+963968417550', '+963968724550', '+963944503515'],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'الصالحية، شارع الباكستان، دخلة ابو عبدو للعصائر',
+      addressLocality: 'دمشق',
+      addressCountry: 'SY',
+    },
+    areaServed: 'SY',
   }
 }
 

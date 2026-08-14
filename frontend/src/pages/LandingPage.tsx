@@ -61,10 +61,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <BrandLogo size="sm" />
-            <div>
-              <p className="text-sm font-bold text-gold-300 tracking-wide">{brandName}</p>
-              <p className="text-[10px] text-white/40">{brandNameAr}</p>
-            </div>
+            <p className="text-sm font-bold text-gold-300 tracking-wide hidden sm:block">{brandNameAr}</p>
           </div>
           <nav aria-label="القائمة الرئيسية" className="flex items-center gap-3">
             <Link
@@ -226,18 +223,54 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="bg-[#080c16] py-10">
-        <div className="max-w-6xl mx-auto px-4 text-center space-y-3">
-          <p className="text-sm text-white/50">
+      <footer className="bg-[#080c16] py-12 border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-4 text-center space-y-5">
+          <div className="flex justify-center">
+            <BrandLogo size="md" />
+          </div>
+
+          <p className="text-sm text-white/55 leading-relaxed" dir="rtl">
+            العنوان:{' '}
+            <span className="text-white/75">
+              سوريا — دمشق — الصالحية — شارع الباكستان — دخلة ابو عبدو للعصائر — مجوهرات تاج
+            </span>
+          </p>
+
+          <div className="space-y-2 text-sm text-white/55" dir="ltr">
+            <p className="text-white/40 text-xs font-semibold tracking-wide" dir="rtl">
+              لاستفساراتكم:
+            </p>
+            <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+              <a href="tel:+963968417550" className="hover:text-gold-300 transition-colors font-medium">
+                +963 968 417 550
+              </a>
+              <span className="text-white/20">|</span>
+              <a href="tel:+963968724550" className="hover:text-gold-300 transition-colors font-medium">
+                +963 968 724 550
+              </a>
+              <span className="text-white/20">|</span>
+              <a href="tel:+963944503515" className="hover:text-gold-300 transition-colors font-medium">
+                +963 944 503 515
+              </a>
+            </p>
+            <p>
+              <a
+                href="mailto:bassam.alsloom123@gmail.com"
+                className="hover:text-gold-300 transition-colors"
+              >
+                bassam.alsloom123@gmail.com
+              </a>
+            </p>
+          </div>
+
+          <p className="text-sm text-white/40 pt-2">
             <Link to="/verify" className="hover:text-gold-300 transition-colors">التحقق من الشهادة</Link>
-            <span className="mx-2 text-white/20">|</span>
+            <span className="mx-2 text-white/15">|</span>
             <a href="#product" className="hover:text-gold-300 transition-colors">تفاصيل المنتج</a>
           </p>
+
           <p className="text-sm text-white/30">
-            © {new Date().getFullYear()} {brandName} — {brandNameAr}. جميع الحقوق محفوظة.
-          </p>
-          <p className="text-xs text-white/20">
-            نظام التحقق من شهادات أصالة سبائك الذهب
+            © {new Date().getFullYear()} {brandName} — {brandNameAr}
           </p>
         </div>
       </footer>

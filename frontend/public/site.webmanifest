@@ -10,10 +10,10 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/brand/taj-logo.png",
+      "sizes": "612x408",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
