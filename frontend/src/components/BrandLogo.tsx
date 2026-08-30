@@ -1,5 +1,5 @@
 interface BrandLogoProps {
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
   className?: string
 }
 
@@ -7,6 +7,7 @@ const sizes = {
   sm: { height: 40, width: 60 },
   md: { height: 64, width: 96 },
   lg: { height: 88, width: 132 },
+  xl: { height: 120, width: 180 },
 }
 
 export const BRAND_LOGO_SRC = '/brand/taj-logo.png'

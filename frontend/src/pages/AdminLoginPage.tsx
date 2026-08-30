@@ -6,8 +6,8 @@ import Seo from '../components/Seo'
 import axios from 'axios'
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('admin@tajjewelry.com')
-  const [password, setPassword] = useState('admin123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -44,11 +44,13 @@ export default function AdminLoginPage() {
           <p className="text-sm text-navy-800/50 mt-1">تسجيل دخول الإدارة</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
           <div>
             <label className="block text-sm font-semibold text-navy-800 mb-1.5">البريد الإلكتروني</label>
             <input
               type="email"
+              name="admin_email"
+              autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-gold-200 bg-white focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
@@ -60,6 +62,8 @@ export default function AdminLoginPage() {
             <label className="block text-sm font-semibold text-navy-800 mb-1.5">كلمة المرور</label>
             <input
               type="password"
+              name="admin_password"
+              autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-gold-200 bg-white focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"

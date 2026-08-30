@@ -17,9 +17,18 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+export function toDtSerial(serial: string): string {
+  const cleaned = serial.trim().toUpperCase().replace(/[\s,،_-]/g, '')
+  if (/^\d+$/.test(cleaned)) {
+    return `DT${cleaned}`
+  }
+  return cleaned
+}
+
 export async function verifyCertificate(serial: string): Promise<ApiResponse> {
   try {
-    const response = await api.get<ApiResponse>(`/certificates/${encodeURIComponent(serial.trim())}`)
+    const normalized = toDtSerial(serial)
+    const response = await api.get<ApiResponse>(`/certificates/${encodeURIComponent(normalized)}`)
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data) {
@@ -53,9 +62,9 @@ export interface CertificateFormData {
   metal_ar?: string
   type?: string
   type_ar?: string
-  karat: number
-  purity: number
-  weight: number
+  karat: number | ''
+  purity: number | ''
+  weight: number | ''
   weight_unit?: string
   issued_at?: string
   is_verified?: boolean

@@ -9,7 +9,7 @@ import Seo, {
 const brandName = import.meta.env.VITE_BRAND_NAME || 'TAJ JEWELRY'
 const brandNameAr = import.meta.env.VITE_BRAND_NAME_AR || 'تاج للمجوهرات'
 
-const weights = ['1', '2.5', '5', '10', '20', '31.1', '50', '100']
+const weights = ['1', '2', '5', '10', '20', '50', '100']
 
 const productSpecs = [
   { label: 'المعدن', value: 'ذهب خالص' },
@@ -155,6 +155,65 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section id="bars" className="py-20 sm:py-28 bg-[#080c16] relative overflow-hidden" aria-labelledby="bars-title">
+        <div
+          className="absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse 55% 45% at 15% 20%, rgba(184,134,11,0.18), transparent), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(207,159,63,0.1), transparent)',
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <p className="text-gold-400 text-xs font-bold tracking-[0.28em] uppercase mb-3">The Bar</p>
+            <h2 id="bars-title" className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
+              وجه السبيكة وظهرها
+            </h2>
+            <p className="text-white/50 max-w-xl mx-auto leading-relaxed">
+              قطعة واحدة بوجهين: الفن في الأمام، والضمان الرسمي للوزن والنقاء في الخلف.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-stretch">
+            {[
+              {
+                src: '/brand/tag-1.png',
+                tag: 'TAG 1',
+                title: 'الوجه الفني',
+                desc: 'نقوش Fortuna البارزة على ذهب خالص',
+              },
+              {
+                src: '/brand/tag-2.png',
+                tag: 'TAG 2',
+                title: 'الوجه الرسمي',
+                desc: 'الوزن، النقاء، وعلامات الفحص المعتمدة',
+              },
+            ].map((bar) => (
+              <figure
+                key={bar.tag}
+                className="group relative rounded-3xl overflow-hidden bg-black border border-gold-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-500 hover:border-gold-400/50 hover:shadow-[0_24px_80px_rgba(184,134,11,0.22)]"
+              >
+                <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_center,rgba(184,134,11,0.12),transparent_70%)]" />
+                <div className="aspect-[3/4] flex items-center justify-center p-6 sm:p-8">
+                  <img
+                    src={bar.src}
+                    alt={`${bar.tag} — ${bar.title}`}
+                    className="max-h-full w-auto object-contain drop-shadow-[0_12px_40px_rgba(184,134,11,0.35)] transition-transform duration-700 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption className="relative px-6 pb-6 pt-1 text-center">
+                  <p className="text-[11px] font-bold tracking-[0.35em] text-gold-400 mb-1">{bar.tag}</p>
+                  <p className="text-lg font-bold text-white">{bar.title}</p>
+                  <p className="text-sm text-white/45 mt-1">{bar.desc}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="product" className="py-20 sm:py-28 bg-[#0c1220] relative overflow-hidden" aria-labelledby="product-title">
         <div
           className="absolute inset-0 opacity-40"
@@ -265,6 +324,8 @@ export default function LandingPage() {
 
           <p className="text-sm text-white/40 pt-2">
             <Link to="/verify" className="hover:text-gold-300 transition-colors">التحقق من الشهادة</Link>
+            <span className="mx-2 text-white/15">|</span>
+            <a href="#bars" className="hover:text-gold-300 transition-colors">السبيكة</a>
             <span className="mx-2 text-white/15">|</span>
             <a href="#product" className="hover:text-gold-300 transition-colors">تفاصيل المنتج</a>
           </p>

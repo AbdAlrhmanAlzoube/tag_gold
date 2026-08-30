@@ -43,9 +43,15 @@ if [ "${RUN_SEEDERS}" = "true" ]; then
     php artisan db:seed --force --no-interaction
 fi
 
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache 2>/dev/null || true
+if [ "${APP_ENV}" = "local" ] || [ "${APP_DEBUG}" = "true" ]; then
+    php artisan config:clear
+    php artisan route:clear
+    php artisan view:clear 2>/dev/null || true
+else
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache 2>/dev/null || true
+fi
 php artisan storage:link 2>/dev/null || true
 
 exec "$@"

@@ -4,16 +4,32 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use App\Services\DtSerialResolver;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
+    public function __construct(private DtSerialResolver $resolver) {}
+
     public function verify(string $serial): JsonResponse
     {
+        $serial = strtoupper(trim(rawurldecode($serial)));
+
         $certificate = Certificate::query()
-            ->where('serial_number', strtoupper(trim($serial)))
+            ->where('serial_number', $serial)
             ->first();
+
+        if (! $certificate) {
+            $parsed = $this->resolver->parse($serial);
+            if ($parsed) {
+                $certificate = Certificate::query()
+                    ->where('serial_number', $parsed['serial'])
+                    ->first();
+            }
+        }
+
+        $certificate ??= $this->resolver->resolve($serial);
 
         if (! $certificate) {
             return response()->json([

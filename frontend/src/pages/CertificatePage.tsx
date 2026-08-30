@@ -5,6 +5,7 @@ import { verifyCertificate, getCertificateUrl } from '../api/client'
 import type { Certificate } from '../types/certificate'
 import BrandLogo from '../components/BrandLogo'
 import Seo, { SITE_URL } from '../components/Seo'
+import { useHoldSplash } from '../components/PageTransition'
 
 interface SpecRowProps {
   label: string
@@ -31,6 +32,8 @@ export default function CertificatePage() {
   const [certificate, setCertificate] = useState<Certificate | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+
+  useHoldSplash(loading)
 
   useEffect(() => {
     if (!serial) return
@@ -179,7 +182,6 @@ export default function CertificatePage() {
                   label="الوزن"
                   value={`${certificate.weight} ${certificate.weight_unit}`}
                 />
-                <SpecRow label="تاريخ الإصدار" value={certificate.issued_at_formatted} />
               </div>
             </div>
 

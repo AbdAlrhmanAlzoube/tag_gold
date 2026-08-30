@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+import PageTransition from './components/PageTransition'
 import LandingPage from './pages/LandingPage'
 import VerifyPage from './pages/VerifyPage'
 import CertificatePage from './pages/CertificatePage'
@@ -10,16 +11,18 @@ import NotFoundPage from './pages/NotFoundPage'
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route element={<Layout />}>
-          <Route path="/verify" element={<VerifyPage />} />
-          <Route path="/cert/:serial" element={<CertificatePage />} />
-          <Route path="/admin" element={<AdminLoginPage />} />
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+      <PageTransition>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route element={<Layout />}>
+            <Route path="/verify" element={<VerifyPage />} />
+            <Route path="/cert/:serial" element={<CertificatePage />} />
+            <Route path="/admin" element={<AdminLoginPage />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </PageTransition>
     </BrowserRouter>
   )
 }

@@ -17,14 +17,14 @@ import Seo from '../components/Seo'
 const emptyForm: CertificateFormData = {
   serial_number: '',
   item_name: '',
-  metal: 'Gold',
-  metal_ar: 'ذهب',
-  type: 'Bar',
-  type_ar: 'سبيكة',
-  karat: 24,
-  purity: 999,
-  weight: 31.1035,
-  weight_unit: 'g',
+  metal: '',
+  metal_ar: '',
+  type: '',
+  type_ar: '',
+  karat: '',
+  purity: '',
+  weight: '',
+  weight_unit: '',
   is_verified: true,
 }
 
@@ -213,6 +213,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-wrap items-center gap-3 mb-5">
         <input
           type="search"
+          autoComplete="off"
           placeholder="بحث برقم الشهادة أو الاسم..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -318,12 +319,13 @@ export default function AdminDashboardPage() {
                 ×
               </button>
             </div>
-            <form onSubmit={handleSave} className="p-6 space-y-4">
+            <form onSubmit={handleSave} className="p-6 space-y-4" autoComplete="off">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className="block text-xs font-semibold text-navy-800 mb-1">رقم الشهادة *</label>
                   <input
                     required
+                    autoComplete="off"
                     value={form.serial_number}
                     onChange={(e) => setField('serial_number', e.target.value.toUpperCase())}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 font-mono text-left"
@@ -335,6 +337,7 @@ export default function AdminDashboardPage() {
                   <label className="block text-xs font-semibold text-navy-800 mb-1">اسم القطعة *</label>
                   <input
                     required
+                    autoComplete="off"
                     value={form.item_name}
                     onChange={(e) => setField('item_name', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400"
@@ -348,8 +351,9 @@ export default function AdminDashboardPage() {
                     required
                     min={1}
                     max={24}
+                    autoComplete="off"
                     value={form.karat}
-                    onChange={(e) => setField('karat', Number(e.target.value))}
+                    onChange={(e) => setField('karat', e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
                     dir="ltr"
                   />
@@ -360,8 +364,9 @@ export default function AdminDashboardPage() {
                     type="number"
                     required
                     min={1}
+                    autoComplete="off"
                     value={form.purity}
-                    onChange={(e) => setField('purity', Number(e.target.value))}
+                    onChange={(e) => setField('purity', e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
                     dir="ltr"
                   />
@@ -373,8 +378,9 @@ export default function AdminDashboardPage() {
                     required
                     step="0.0001"
                     min={0.0001}
+                    autoComplete="off"
                     value={form.weight}
-                    onChange={(e) => setField('weight', Number(e.target.value))}
+                    onChange={(e) => setField('weight', e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
                     dir="ltr"
                   />
@@ -382,7 +388,8 @@ export default function AdminDashboardPage() {
                 <div>
                   <label className="block text-xs font-semibold text-navy-800 mb-1">وحدة الوزن</label>
                   <input
-                    value={form.weight_unit || 'g'}
+                    autoComplete="off"
+                    value={form.weight_unit || ''}
                     onChange={(e) => setField('weight_unit', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
                     dir="ltr"
@@ -391,6 +398,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <label className="block text-xs font-semibold text-navy-800 mb-1">المعدن (EN)</label>
                   <input
+                    autoComplete="off"
                     value={form.metal || ''}
                     onChange={(e) => setField('metal', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
@@ -400,6 +408,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <label className="block text-xs font-semibold text-navy-800 mb-1">المعدن (AR)</label>
                   <input
+                    autoComplete="off"
                     value={form.metal_ar || ''}
                     onChange={(e) => setField('metal_ar', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400"
@@ -408,6 +417,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <label className="block text-xs font-semibold text-navy-800 mb-1">النوع (EN)</label>
                   <input
+                    autoComplete="off"
                     value={form.type || ''}
                     onChange={(e) => setField('type', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400 text-left"
@@ -417,6 +427,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <label className="block text-xs font-semibold text-navy-800 mb-1">النوع (AR)</label>
                   <input
+                    autoComplete="off"
                     value={form.type_ar || ''}
                     onChange={(e) => setField('type_ar', e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border border-gold-200 focus:outline-none focus:ring-2 focus:ring-gold-400"

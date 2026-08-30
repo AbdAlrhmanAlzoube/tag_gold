@@ -24,14 +24,20 @@ export default function VerifyPage() {
     e.preventDefault()
     setError('')
 
-    const trimmed = serial.trim()
+    const trimmed = serial.trim().toUpperCase()
     if (!trimmed) {
       setError('يرجى إدخال رقم الشهادة')
       return
     }
 
+    const withPrefix = trimmed.startsWith('DT') ? trimmed : `DT${trimmed}`
+    if (!/^DT\d+$/.test(withPrefix.replace(/[\s,،_-]/g, ''))) {
+      setError('رقم الشهادة يجب أن يبدأ بـ DT متبوعاً بالرقم')
+      return
+    }
+
     setLoading(true)
-    navigate(`/cert/${encodeURIComponent(trimmed)}`)
+    navigate(`/cert/${encodeURIComponent(withPrefix.replace(/[\s,،_-]/g, ''))}`)
   }
 
   return (
@@ -76,10 +82,14 @@ export default function VerifyPage() {
                 type="text"
                 value={serial}
                 onChange={(e) => {
-                  setSerial(e.target.value.toUpperCase())
+                  let value = e.target.value.toUpperCase()
+                  if (value && !value.startsWith('DT') && /^\d/.test(value)) {
+                    value = `DT${value}`
+                  }
+                  setSerial(value)
                   setError('')
                 }}
-                placeholder="SG100001"
+                placeholder="DT1000001"
                 className="w-full px-4 py-3.5 rounded-xl border border-gold-200 bg-white text-navy-900 placeholder:text-navy-800/30 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-left font-mono tracking-wider"
                 dir="ltr"
                 autoComplete="off"
@@ -109,21 +119,29 @@ export default function VerifyPage() {
 
       <div className="mt-6 text-center no-print">
         <p className="text-xs text-navy-800/40">
-          للتجربة: جرّب الأرقام{' '}
+          للتجربة: جرّب{' '}
           <button
             type="button"
-            onClick={() => setSerial('SG100001')}
+            onClick={() => setSerial('DT1')}
             className="text-gold-600 hover:text-gold-700 font-mono underline cursor-pointer"
           >
-            SG100001
+            DT1
           </button>
           {' '}أو{' '}
           <button
             type="button"
-            onClick={() => setSerial('A01748')}
+            onClick={() => setSerial('DT1000001')}
             className="text-gold-600 hover:text-gold-700 font-mono underline cursor-pointer"
           >
-            A01748
+            DT1000001
+          </button>
+          {' '}أو{' '}
+          <button
+            type="button"
+            onClick={() => setSerial('DT5500001')}
+            className="text-gold-600 hover:text-gold-700 font-mono underline cursor-pointer"
+          >
+            DT5500001
           </button>
         </p>
       </div>
