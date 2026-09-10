@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE_URL = (import.meta.env.VITE_APP_URL || 'https://taj-jeweiry.abdulrahem-alzoubi.cloud').replace(/\/$/, '')
+const SITE_URL = (import.meta.env.VITE_APP_URL || 'https://taj-jewelry.com').replace(/\/$/, '')
 const BRAND = import.meta.env.VITE_BRAND_NAME || 'TAJ JEWELRY'
 const BRAND_AR = import.meta.env.VITE_BRAND_NAME_AR || 'تاج للمجوهرات'
 const DEFAULT_DESC =

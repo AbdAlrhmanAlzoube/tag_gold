@@ -171,7 +171,7 @@ export default function LandingPage() {
               سبائك حسب الوزن
             </h2>
             <p className="text-white/50 max-w-xl mx-auto leading-relaxed">
-              لكل وزن وجه خاص يظهر العيار، وظهر موحّد بتصميم تاج للمجوهرات.
+              الوجه موحّد بتصميم تاج للمجوهرات، والظهر يظهر وزن كل عيار.
             </p>
           </div>
 

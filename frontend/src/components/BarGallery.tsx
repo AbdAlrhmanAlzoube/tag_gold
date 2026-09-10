@@ -56,18 +56,18 @@ function BarCard({
       >
         <span className="bar-flip-inner">
           <span className="bar-flip-face bar-flip-front">
-            <img src={front} alt={`سبيكة ${weight} غرام — الوجه`} />
+            <img src={backImg} alt={`سبيكة ${weight} غرام — الوجه`} />
             <span className="bar-flip-badge">الوجه</span>
           </span>
           <span className="bar-flip-face bar-flip-back">
-            <img src={backImg} alt={`سبيكة ${weight} غرام — الظهر`} />
+            <img src={front} alt={`سبيكة ${weight} غرام — الظهر`} />
             <span className="bar-flip-badge">الظهر</span>
           </span>
         </span>
       </button>
 
       <p className="mt-4 text-center text-xs text-white/35">
-        مرّر أو اضغط لقلب البطاقة — الوجه يختلف حسب الوزن، والظهر موحّد
+        مرّر أو اضغط لقلب البطاقة — الوجه موحّد، والظهر يختلف حسب الوزن
       </p>
     </article>
   )

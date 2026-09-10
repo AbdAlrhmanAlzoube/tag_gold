@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
-Sitemap: https://taj-jeweiry.abdulrahem-alzoubi.cloud/sitemap.xml
+Sitemap: https://taj-jewelry.com/sitemap.xml

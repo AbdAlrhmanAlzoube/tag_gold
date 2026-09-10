@@ -5,7 +5,7 @@
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/var/www/html/tag_gold}"
-DOMAIN="${DOMAIN:-taj-jeweiry.abdulrahem-alzoubi.cloud}"
+DOMAIN="${DOMAIN:-taj-jewelry.com}"
 NGINX_CONF="${NGINX_CONF:-/etc/nginx/conf.d/taj-jewelry.conf}"
 SKIP_PULL="${SKIP_PULL:-0}"
 SKIP_NGINX="${SKIP_NGINX:-0}"
