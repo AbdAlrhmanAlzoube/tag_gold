@@ -71,6 +71,7 @@ export default function CertificatePage() {
           title={serial ? `التحقق من الشهادة ${serial}` : 'التحقق من الشهادة'}
           description="جاري التحقق من شهادة أصالة سبيكة الذهب."
           path={serial ? `/cert/${serial}` : '/verify'}
+          noindex
         />
         <div className="bg-white/80 rounded-2xl p-12 text-center shadow-xl">
           <div className="inline-block w-10 h-10 border-4 border-gold-200 border-t-gold-500 rounded-full animate-spin mb-4" />
@@ -116,6 +117,7 @@ export default function CertificatePage() {
         title={`شهادة أصالة ${certificate.serial_number}`}
         description={`شهادة موثقة لسبيكة ${certificate.item_name} — عيار ${certificate.karat}، نقاء ${certificate.purity}، وزن ${certificate.weight}${certificate.weight_unit}. ${certificate.brand_ar || 'تاج للمجوهرات'}.`}
         path={`/cert/${certificate.serial_number}`}
+        noindex
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Product',

@@ -5,6 +5,7 @@ import Seo, {
   organizationJsonLd,
   websiteJsonLd,
   serviceJsonLd,
+  faqJsonLd,
 } from '../components/Seo'
 
 const brandName = import.meta.env.VITE_BRAND_NAME || 'TAJ JEWELRY'
@@ -50,12 +51,31 @@ const features = [
   },
 ]
 
+const faqs = [
+  {
+    q: 'ما هي مجوهرات تاج في دمشق؟',
+    a: 'مجوهرات تاج (تاج للمجوهرات / TAJ JEWELRY / taj-jewelry) محل ذهب في دمشق — الصالحية، شارع الباكستان. نقدّم سبائك ذهب عيار 24 مع تحقق رقمي عبر QR.',
+  },
+  {
+    q: 'كيف أتحقق من سبيكة تاج؟',
+    a: 'امسح رمز QR على السبيكة أو أدخل رقم الشهادة الذي يبدأ بـ DT في صفحة التحقق على taj-jewelry.com.',
+  },
+  {
+    q: 'أين يقع محل تاج للمجوهرات؟',
+    a: 'سوريا — دمشق — الصالحية — شارع الباكستان — دخلة ابو عبدو للعصائر — مجوهرات تاج.',
+  },
+  {
+    q: 'ما أوزان سبائك تاج المتوفرة؟',
+    a: 'سبائك ذهب 1، 2، 5، 10، 20، 50 و100 غرام، نقاء 995 وعيار 24 قيراط.',
+  },
+]
+
 export default function LandingPage() {
   return (
     <div className="w-full">
       <Seo
         path="/"
-        jsonLd={[organizationJsonLd(), websiteJsonLd(), serviceJsonLd()]}
+        jsonLd={[organizationJsonLd(), websiteJsonLd(), serviceJsonLd(), faqJsonLd(faqs)]}
       />
 
       <header className="fixed top-0 inset-x-0 z-50 bg-[#0c1220]/80 backdrop-blur-md border-b border-white/5">
@@ -65,17 +85,17 @@ export default function LandingPage() {
             <p className="text-sm font-bold text-gold-300 tracking-wide hidden sm:block">{brandNameAr}</p>
           </div>
           <nav aria-label="القائمة الرئيسية" className="flex items-center gap-3">
-            <Link
-              to="/verify"
+            <a
+              href="#store"
               className="hidden sm:inline-block text-sm text-white/70 hover:text-gold-300 transition-colors px-3 py-2"
             >
-              التحقق من شهادة
-            </Link>
+              المحل في دمشق
+            </a>
             <Link
-              to="/admin"
+              to="/verify"
               className="text-sm font-semibold text-[#0c1220] bg-gold-400 hover:bg-gold-300 px-4 py-2 rounded-lg transition-colors"
             >
-              لوحة التحكم
+              التحقق من شهادة
             </Link>
           </nav>
         </div>
@@ -100,15 +120,14 @@ export default function LandingPage() {
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 w-full">
           <div className="max-w-2xl animate-fade-in-up">
             <p className="text-gold-400 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              {brandName} — {brandNameAr}
+              {brandName} — {brandNameAr} — دمشق
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.15] mb-5">
-              التحقق من شهادة سبيكة الذهب
-              <span className="block text-gold-300 mt-1">أصالة موثّقة رقمياً</span>
+              مجوهرات تاج دمشق
+              <span className="block text-gold-300 mt-1">تحقق من سبيكة الذهب</span>
             </h1>
             <p className="text-lg text-white/55 leading-relaxed mb-8 max-w-lg">
-              نظام احترافي للتحقق من أصالة سبائك الذهب عبر رقم الشهادة أو رمز QR —
-              ثقة كاملة لعملاء {brandNameAr} في كل قطعة.
+              تاج للمجوهرات (TAJ JEWELRY / taj-jewelry) في الصالحية بدمشق. تحقق من أصالة سبائك الذهب عبر رقم الشهادة أو رمز QR.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -121,10 +140,10 @@ export default function LandingPage() {
                 </svg>
               </Link>
               <a
-                href="#product"
+                href="#store"
                 className="inline-flex items-center px-6 py-3.5 rounded-xl border border-white/20 text-white/80 hover:bg-white/5 font-semibold transition-colors"
               >
-                تفاصيل المنتج
+                عنوان المحل
               </a>
             </div>
           </div>
@@ -153,6 +172,22 @@ export default function LandingPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="store" className="py-20 sm:py-24 bg-gradient-to-b from-[#ebe4d4] to-[#f5f0e6]" aria-labelledby="store-title">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-gold-600 text-xs font-bold tracking-[0.2em] uppercase mb-3">Damascus</p>
+          <h2 id="store-title" className="text-3xl sm:text-4xl font-extrabold text-navy-900 mb-4">
+            محل تاج للمجوهرات في دمشق
+          </h2>
+          <p className="text-navy-800/65 leading-relaxed mb-6">
+            مجوهرات تاج — المعروفة أيضاً بـ تاج للمجوهرات وTAJ JEWELRY وtaj-jewelry — محل ذهب في
+            الصالحية، شارع الباكستان، دخلة ابو عبدو للعصائر. نقدّم سبائك ذهب عيار 24 ونقاء 995، مع شهادة رقمية لكل قطعة.
+          </p>
+          <p className="text-navy-900 font-semibold">
+            سوريا — دمشق — الصالحية — شارع الباكستان — دخلة ابو عبدو للعصائر — مجوهرات تاج
+          </p>
         </div>
       </section>
 
@@ -228,6 +263,22 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section id="faq" className="py-20 sm:py-24 bg-[#0c1220]" aria-labelledby="faq-title">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <h2 id="faq-title" className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
+            أسئلة شائعة
+          </h2>
+          <dl className="space-y-6">
+            {faqs.map((item) => (
+              <div key={item.q} className="border-b border-white/10 pb-6">
+                <dt className="text-lg font-bold text-gold-300 mb-2">{item.q}</dt>
+                <dd className="text-white/60 leading-relaxed m-0">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       <section className="py-20 bg-[#0c1220] relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-30"
@@ -288,6 +339,10 @@ export default function LandingPage() {
           </div>
 
           <p className="text-sm text-white/40 pt-2">
+            <a href="#store" className="hover:text-gold-300 transition-colors">تاج دمشق</a>
+            <span className="mx-2 text-white/15">|</span>
+            <a href="#faq" className="hover:text-gold-300 transition-colors">أسئلة شائعة</a>
+            <span className="mx-2 text-white/15">|</span>
             <Link to="/verify" className="hover:text-gold-300 transition-colors">التحقق من الشهادة</Link>
             <span className="mx-2 text-white/15">|</span>
             <a href="#bars" className="hover:text-gold-300 transition-colors">السبيكة</a>
@@ -296,7 +351,7 @@ export default function LandingPage() {
           </p>
 
           <p className="text-sm text-white/30">
-            © {new Date().getFullYear()} {brandName} — {brandNameAr}
+            © {new Date().getFullYear()} {brandName} — {brandNameAr} — taj-jewelry.com — دمشق
           </p>
         </div>
       </footer>

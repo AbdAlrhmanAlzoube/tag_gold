@@ -43,8 +43,8 @@ export default function VerifyPage() {
   return (
     <div className="w-full max-w-2xl animate-fade-in-up">
       <Seo
-        title="تحقق من شهادة سبيكة الذهب"
-        description="أدخل رقم شهادة السبيكة للتحقق الفوري من الأصالة والعيار والنقاء والوزن — تاج للمجوهرات TAJ JEWELRY."
+        title="تحقق من سبيكة تاج"
+        description="تحقق من شهادة سبيكة الذهب لدى مجوهرات تاج دمشق (TAJ JEWELRY / taj-jewelry) عبر رقم DT أو رمز QR."
         path="/verify"
       />
       <div className="relative overflow-hidden rounded-2xl bg-gold-50/80 backdrop-blur-sm border border-gold-200/60 shadow-xl shadow-gold-900/5">

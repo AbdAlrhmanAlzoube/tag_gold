@@ -4,7 +4,10 @@ const SITE_URL = (import.meta.env.VITE_APP_URL || 'https://taj-jewelry.com').rep
 const BRAND = import.meta.env.VITE_BRAND_NAME || 'TAJ JEWELRY'
 const BRAND_AR = import.meta.env.VITE_BRAND_NAME_AR || 'تاج للمجوهرات'
 const DEFAULT_DESC =
-  'تحقق من أصالة سبيكة الذهب فوراً عبر رقم الشهادة أو رمز QR — نظام شهادات رقمية موثوق من تاج للمجوهرات TAJ JEWELRY.'
+  'مجوهرات تاج في دمشق (TAJ JEWELRY / taj-jewelry) — تحقق من أصالة سبيكة الذهب عبر رقم الشهادة أو رمز QR. محل تاج للمجوهرات في الصالحية.'
+const DEFAULT_TITLE = `مجوهرات تاج دمشق | ${BRAND_AR} — ${BRAND}`
+const DEFAULT_KEYWORDS =
+  'مجوهرات تاج, تاج دمشق, تاج للمجوهرات, TAJ, TAJ JEWELRY, taj-jewelry, مجوهرات دمشق, ذهب الصالحية, تحقق من سبيكة ذهب'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`
 
 export { SITE_URL, BRAND, BRAND_AR }
@@ -28,9 +31,7 @@ export default function Seo({
   noindex = false,
   jsonLd,
 }: SeoProps) {
-  const fullTitle = title
-    ? `${title} | ${BRAND_AR} — ${BRAND}`
-    : `التحقق من شهادة سبيكة الذهب | ${BRAND_AR} — ${BRAND}`
+  const fullTitle = title ? `${title} | ${BRAND_AR} — ${BRAND}` : DEFAULT_TITLE
   const url = `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
 
   const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []
@@ -42,7 +43,7 @@ export default function Seo({
       <meta name="description" content={description} />
       <meta
         name="keywords"
-        content="تحقق من سبيكة ذهب, شهادة أصالة ذهب, التحقق من شهادة ذهب, تاج للمجوهرات, TAJ JEWELRY, شهادة سبيكة ذهب, QR ذهب, gold bar certificate verification"
+        content={DEFAULT_KEYWORDS}
       />
       <link rel="canonical" href={url} />
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
@@ -77,7 +78,7 @@ export function organizationJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'JewelryStore',
     name: BRAND,
-    alternateName: BRAND_AR,
+    alternateName: [BRAND_AR, 'مجوهرات تاج', 'تاج دمشق', 'taj-jewelry', 'TAJ'],
     url: SITE_URL,
     logo: `${SITE_URL}/brand/taj-logo.png`,
     image: `${SITE_URL}/brand/taj-logo.png`,
@@ -88,9 +89,27 @@ export function organizationJsonLd() {
       '@type': 'PostalAddress',
       streetAddress: 'الصالحية، شارع الباكستان، دخلة ابو عبدو للعصائر',
       addressLocality: 'دمشق',
+      addressRegion: 'دمشق',
       addressCountry: 'SY',
     },
-    areaServed: 'SY',
+    areaServed: {
+      '@type': 'City',
+      name: 'دمشق',
+    },
+    priceRange: '$$',
+    currenciesAccepted: 'SYP',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'سبائك ذهب تاج',
+      itemListElement: [1, 2, 5, 10, 20, 50, 100].map((w) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Product',
+          name: `سبيكة ذهب ${w} غرام — تاج للمجوهرات`,
+          brand: BRAND,
+        },
+      })),
+    },
   }
 }
 
@@ -98,15 +117,11 @@ export function websiteJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: `${BRAND_AR} — التحقق من الشهادات`,
+    name: `${BRAND_AR} — ${BRAND}`,
+    alternateName: ['مجوهرات تاج', 'تاج دمشق', 'taj-jewelry'],
     url: SITE_URL,
     inLanguage: 'ar',
-    publisher: { '@type': 'Organization', name: BRAND },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_URL}/cert/{serial}`,
-      'query-input': 'required name=serial',
-    },
+    publisher: { '@type': 'Organization', name: BRAND, alternateName: BRAND_AR },
   }
 }
 
@@ -129,7 +144,7 @@ export function serviceJsonLd() {
     name: 'التحقق من شهادة أصالة سبيكة الذهب',
     serviceType: 'Gold Certificate Verification',
     provider: { '@type': 'Organization', name: BRAND, alternateName: BRAND_AR },
-    areaServed: 'Worldwide',
+    areaServed: { '@type': 'City', name: 'دمشق' },
     url: `${SITE_URL}/verify`,
     description: DEFAULT_DESC,
   }
